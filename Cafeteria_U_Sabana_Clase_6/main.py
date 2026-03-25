@@ -47,39 +47,122 @@ Para demostrar que funciona:
 """
 
 # main.py
+# ==============================================================================
+# ARCHIVO PRINCIPAL (ORQUESTADOR Y BATERÍA DE PRUEBAS)
+# ==============================================================================
 
-# Aquí se aplica la importación (import). 
-# El archivo main.py actúa como el gerente de la empresa: 
-# no hace el trabajo operativo, pero llama a los demás módulos para que trabajen juntos.
-
-# 1. IMPORTACIONES: Traemos las piezas de nuestros otros archivos
+# 1. IMPORTACIONES: Traemos todas las clases de nuestros módulos
 from productos import Bebida, Snack
 from clientes import Estudiante, Profesor
+from proveedores import Proveedor
 from ventas import CarritoDeCompras
 
 def main():
+    print("☕ INICIANDO BATERÍA DE PRUEBAS 'CAFETERÍA U. SABANA' ☕\n")
 
-    print("Iniciando Sistema Cafeteria_U_Sabana...\n")
-
-    # 1. Creamos nuestro inventario
+    # ==========================================================================
+    # PRUEBA 1: MÓDULO DE PRODUCTOS (Herencia y Polimorfismo)
+    # ==========================================================================
+    print("--- 1. PRUEBAS DE PRODUCTOS ---")
+    
+    # Instanciamos los objetos
     cafe_tostao = Bebida(nombre="Café de Origen Tostao", precio=5000, stock=50, tamano="Mediano")
     chocolate_jet = Snack(nombre="Chocolatina Jet", precio=1200, stock=100, gramos=12)
 
-    # 2. Creamos al cliente (Prueba cambiando 'Estudiante' por 'Profesor' para ver cómo cambia el descuento)
-    cliente_actual_1 = Estudiante(nombre="Diego Zuluaga", id_cliente="00012345") # Prueba con un estudiante para ver el descuento del 10%
-    cliente_actual_2 = Profesor(nombre="Yeimy Castillo", id_cliente="00067890") # Prueba con un profesor para ver el cambio en el descuento
+    # Probamos lectura de atributos públicos y privados (Getters)
+    print(f"Nombre Bebida: {cafe_tostao.nombre}")                # Café de Origen Tostao
+    print(f"Precio Bebida: ${cafe_tostao.get_precio():,.0f}")    # 5000 (Viene de atributo privado)
+    print(f"Stock Bebida:  {cafe_tostao.get_stock()} unds")      # 50 (Viene de atributo privado)
+    print(f"Tamaño Bebida: {cafe_tostao.tamano}")                # Mediano (Atributo propio de Bebida)
 
-    # 3. Inicializamos el sistema de ventas INYECTANDO al cliente
-    caja_registradora_1 = CarritoDeCompras(cliente=cliente_actual_1) # Inyectamos el cliente estudiante
-    caja_registradora_2 = CarritoDeCompras(cliente=cliente_actual_2) # Inyectamos el cliente profesor
+    print("\n") # Salto de línea
 
-    # 4. Simulamos transacciones
-    caja_registradora_1.agregar_producto(cafe_tostao, 2)    
-    caja_registradora_2.agregar_producto(chocolate_jet, 5)  
+    print(f"Nombre Snack: {chocolate_jet.nombre}")               # Chocolatina Jet
+    print(f"Precio Snack: ${chocolate_jet.get_precio():,.0f}")   # 1200
+    print(f"Stock Snack:  {chocolate_jet.get_stock()} unds")     # 100
+    print(f"Peso Snack:   {chocolate_jet.gramos}g")              # 12 (Atributo propio de Snack)
 
-    # 5. Generamos el reporte final
-    caja_registradora_1.generar_factura()
-    caja_registradora_2.generar_factura()
+    print("\n")
+
+    # Probamos el Polimorfismo (Mismo método, diferente cálculo matemático)
+    print(f"Impuesto Café (8%):  ${cafe_tostao.calcular_impuesto():,.1f}")    # 400.0
+    print(f"Impuesto Snack (19%): ${chocolate_jet.calcular_impuesto():,.1f}") # 228.0
+    print("\n")
+
+
+    # ==========================================================================
+    # PRUEBA 2: MÓDULO DE CLIENTES (Polimorfismo en Descuentos)
+    # ==========================================================================
+    print("--- 2. PRUEBAS DE CLIENTES ---")
+    
+    estudiante_ana = Estudiante(nombre="Ana Gómez", id_cliente="1001")
+    profesor_carlos = Profesor(nombre="Carlos Ruiz", id_cliente="2002")
+    
+    print(f"Descuento Estudiante ({estudiante_ana.nombre}): {estudiante_ana.obtener_descuento() * 100}%") # 10.0%
+    print(f"Descuento Profesor ({profesor_carlos.nombre}): {profesor_carlos.obtener_descuento() * 100}%") # 5.0%
+    print("\n")
+
+
+    # ==========================================================================
+    # PRUEBA 3: MÓDULO DE PROVEEDORES (Encapsulamiento y Validaciones)
+    # ==========================================================================
+    print("--- 3. PRUEBAS DE PROVEEDORES ---")
+    
+    proveedor_cafe = Proveedor(nombre_empresa="CoopCafé", nit="900123456", ciudad="Bogotá")
+    
+    # Probamos el Setter del NIT con errores intencionales (Sanity Check)
+    print("\n[Prueba de Seguridad NIT]")
+    proveedor_cafe.set_nit("")          # Error: Vacío
+    proveedor_cafe.set_nit("900ABC")    # Error: Contiene letras
+    proveedor_cafe.set_nit("800987654") # Éxito: Formato válido
+    
+    # Probamos la interacción entre objetos (Proveedor abastece Producto)
+    print("\n[Prueba de Abastecimiento]")
+    # Intento fallido (Cantidad 0 o negativa)
+    proveedor_cafe.suministrar_producto(producto=cafe_tostao, cantidad=0) 
+    # Intento exitoso (Suma 20 al stock actual de 50 -> Queda en 70)
+    proveedor_cafe.suministrar_producto(producto=cafe_tostao, cantidad=20) 
+    print("\n")
+
+
+    # ==========================================================================
+    # PRUEBA 4: MÓDULO DE VENTAS (Carrito e Integración Total)
+    # ==========================================================================
+    print("--- 4. PRUEBAS DE CARRITO DE COMPRAS ---")
+    
+    # IMPORTANTE: En la nueva arquitectura, el Carrito EXIGE un objeto Cliente.
+    # Creamos un carrito para la estudiante Ana
+    carrito_ana = CarritoDeCompras(cliente=estudiante_ana)
+
+    # Agregamos productos (Caminos de éxito)
+    print("\n[Agregando productos válidos]")
+    carrito_ana.agregar_producto(cafe_tostao, 2)     # Agrega 2 cafés
+    carrito_ana.agregar_producto(chocolate_jet, 3)   # Agrega 3 snacks
+
+    # Agregamos productos (Caminos de error por falta de stock)
+    print("\n[Prueba de Seguridad: Exceso de Stock]")
+    # El stock del café es 70 (50 iniciales + 20 del proveedor - 2 de la compra anterior = 68 restantes)
+    carrito_ana.agregar_producto(cafe_tostao, 100)   # Error: Supera los 68 disponibles
+    carrito_ana.agregar_producto(chocolate_jet, 101) # Error: Supera los 97 disponibles
+
+    # Generamos la factura de Ana (Debe aplicar 10% de descuento)
+    carrito_ana.generar_factura()
+
+
+    # ==========================================================================
+    # PRUEBA 5: ESCENARIOS ADICIONALES (Profesor y Carrito Vacío)
+    # ==========================================================================
+    print("--- 5. PRUEBAS ADICIONALES ---")
+    
+    # Prueba: Factura de un Profesor (Debe aplicar 5% de descuento)
+    carrito_carlos = CarritoDeCompras(cliente=profesor_carlos)
+    carrito_carlos.agregar_producto(cafe_tostao, 1)
+    carrito_carlos.generar_factura()
+
+    # Prueba: Generar factura con carrito vacío (Manejo de errores de UX)
+    print("\n[Prueba: Carrito Vacío]")
+    carrito_vacio = CarritoDeCompras(cliente=estudiante_ana)
+    carrito_vacio.generar_factura()
 
 # Punto de entrada estándar en Python
 if __name__ == "__main__":
