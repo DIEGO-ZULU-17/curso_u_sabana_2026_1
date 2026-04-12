@@ -1,0 +1,6 @@
+id_venta,cliente_info,producto_info,cantidad,precio_total,fecha
+101,Diego Zuluaga - Profesor,Café Tostao - 5000,2,10000,2026-04-01
+102,ana gomez - estudiante,Chocolatina Jet - 1200,NaN,6000,2026-04-02
+103,Carlos Ruiz - PROFESOR,Empanada - $3000,3,9000,
+104,MARIA LOPEZ - Estudiante,Jugo Hit - 2500,1,NaN,2026-04-03
+105,Luis Perez - Externo,Café Tostao - 5000,4,20000,2026-04-04
