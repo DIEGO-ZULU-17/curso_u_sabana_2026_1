@@ -1,0 +1,6 @@
+id_venta,fecha,Nombre_Cliente,Tipo_Cliente,Nombre_Producto,Precio_Unitario,cantidad,precio_total
+101,2026-04-01,Diego Zuluaga,Profesor,Café Tostao,5000,2.0,10000.0
+102,2026-04-02,Ana Gomez,Estudiante,Chocolatina Jet,1200,5.0,6000.0
+103,2026-04-15,Carlos Ruiz,Profesor,Empanada,3000,3.0,9000.0
+104,2026-04-03,Maria Lopez,Estudiante,Jugo Hit,2500,1.0,2500.0
+105,2026-04-04,Luis Perez,Externo,Café Tostao,5000,4.0,20000.0
