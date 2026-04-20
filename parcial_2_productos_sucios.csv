@@ -1,4 +1,4 @@
-id_producto,nombre,precio,stock,fecha_vencimiento
+id_producto,producto_categoria,precio,stock,fecha_vencimiento
 1,Café Tostao - Bebida,$5000,50,2026-12-01
 2,chocolatina jet - snack,1200,NaN,2027-01-15
 3,Empanada - Snack,$3000,20,2026-05-10

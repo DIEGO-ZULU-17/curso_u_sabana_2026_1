@@ -1,0 +1,21 @@
+id_cliente,email,telefono,fecha_nacimiento,Nombre_Cliente,Tipo_Cliente
+101,diego@correo.com,3001112233.0,1985-05-10,Diego Zuluaga,Profesor
+102,sin_correo@cafeteria.com,No Registra,2004-01-15,Ana Gomez,Estudiante
+103,carlos@correo.com,3109998877.0,1989-08-20,Carlos Ruiz,Profesor
+104,sin_correo@cafeteria.com,3204445566.0,1995-11-30,Maria Lopez,Estudiante
+105,luis@correo.com,No Registra,1976-02-14,Luis Perez,Externo
+106,sofia@correo.com,3112223344.0,2006-03-22,Sofia Ramirez,Estudiante
+107,juan@correo.com,No Registra,2002-07-11,Juan Camilo,Estudiante
+108,sin_correo@cafeteria.com,3156667788.0,1996-09-05,Andres Felipe,Externo
+109,valeria@correo.com,3009991122.0,1981-12-01,Valeria Morales,Profesor
+110,isa@correo.com,No Registra,2005-04-18,Isabella Carranza,Estudiante
+111,sin_correo@cafeteria.com,3105556677.0,2003-02-28,Matias Mondragon,Estudiante
+112,arianne@correo.com,3201112233.0,1999-06-15,Arianne Amorocho,Externo
+113,mariana@correo.com,No Registra,2004-08-08,Mariana Peña,Estudiante
+114,nico@correo.com,3114445566.0,1988-10-10,Nicolas Torres,Profesor
+115,sin_correo@cafeteria.com,3007778899.0,2001-11-25,Juan Leyton,Estudiante
+116,cristian@correo.com,No Registra,1994-01-05,Cristian Bermudez,Externo
+117,paula@correo.com,3152223344.0,2006-09-14,Paula Arciniegas,Estudiante
+118,sin_correo@cafeteria.com,3206667788.0,2002-05-30,Samuel Lozano,Estudiante
+119,gabi@correo.com,No Registra,1984-07-07,Gabriela Ruiz,Profesor
+120,lucas@correo.com,3103334455.0,1995-03-12,Lucas Blanco,Externo

@@ -1,0 +1,21 @@
+id_producto,precio,stock,fecha_vencimiento,Nombre_Producto,Categoria
+1,5000,50,2026-12-01,Café Tostao,Bebida
+2,1200,0,2027-01-15,Chocolatina Jet,Snack
+3,3000,20,2026-05-10,Empanada,Snack
+4,2500,0,2026-08-22,Jugo Hit,Bebida
+5,1500,100,2026-11-30,Galletas Festival,Snack
+6,2000,30,2026-10-10,Agua Cristal,Bebida
+7,7500,15,2026-04-20,Sandwich De Pavo,Almuerzo
+8,3500,0,2026-04-25,Brownie,Postre
+9,3000,40,2026-07-11,Té Helado,Bebida
+10,2200,60,2026-09-05,Papas Margarita,Snack
+11,2800,0,2026-05-15,Croissant,Panaderia
+12,2600,25,2026-06-20,Avena Alpina,Bebida
+13,3200,35,2026-07-30,Yogurt Finesse,Bebida
+14,4000,0,2026-08-10,Muffin De Arandanos,Postre
+15,2500,45,2026-05-05,Dedito De Queso,Snack
+16,5500,10,2026-04-18,Ensalada De Frutas,Postre
+17,8000,0,2026-04-19,Wrap De Pollo,Almuerzo
+18,1000,80,2026-12-20,Gomitas Trululu,Snack
+19,1500,100,2026-04-30,Tinto,Bebida
+20,2000,0,2026-05-01,Aromatica,Bebida
