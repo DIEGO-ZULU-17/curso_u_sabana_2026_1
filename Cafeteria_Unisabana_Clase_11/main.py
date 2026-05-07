@@ -9,11 +9,11 @@ import pandas as pd
 import io # Para convertir strings CSV a DataFrames
 
 # Importamos las variables de datos y las clases Manager
-from datos import csv_clientes, csv_productos, csv_proveedores, csv_ventas
-from clientes import ClienteManager, ClienteDataCleaner, ClienteInteractivo
-from productos import ProductoManager, ProductoDataCleaner, ProductoInteractivo
-from proveedores import ProveedorManager, ProveedorDataCleaner, ProveedorInteractivo
-from ventas import VentasManager, VentasInteractivo
+from Backend.datos import csv_clientes, csv_productos, csv_proveedores, csv_ventas
+from Backend.clientes import ClienteManager, ClienteDataCleaner, ClienteInteractivo
+from Backend.productos import ProductoManager, ProductoDataCleaner, ProductoInteractivo
+from Backend.proveedores import ProveedorManager, ProveedorDataCleaner, ProveedorInteractivo
+from Backend.ventas import VentasManager, VentasInteractivo
 
 # Se debe ubicar en la terminar en esta carpeta y ejecutar: python main.py.
 # Así la ubicación relativa de la base de datos funcionará correctamente 
@@ -530,9 +530,9 @@ def Eliminar_Venta_Interactivo():
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     # 1. Creamos la base de datos a partir del archivo datos.py
-    Cargar_DB()
+    #Cargar_DB()
     
     # 2. Hacemos operaciones CRUD para simular la inserción de nuevos datos y su limpieza automática,
     # para luego ir a Power BI y actualizar el dashboard viendo cómo se reflejan estos cambios en tiempo real.
@@ -554,3 +554,51 @@ if __name__ == "__main__":
     #Eliminar_Producto_Interactivo()
     #Eliminar_Proveedor_Interactivo()
     #Eliminar_Venta_Interactivo()
+
+
+
+# Importamos tkinter para mostrar mensajes emergentes (pop-ups) en la interfaz gráfica
+# Permite mostrar alertas de éxito o error al usuario sin necesidad de imprimir en consola, 
+# lo cual es útil especialmente cuando se integre con la interfaz gráfica (Frontend).
+
+# Debería ir al inicio del archivo main.py para que esté disponible en toda la aplicación,
+# pero lo dejamos aquí para no interferir con la lógica de la base de datos y las simulaciones, 
+# ya que esta importación es principalmente para la parte de la interfaz gráfica (Frontend).
+import tkinter as tk
+import os
+
+# 1. Manejo dinámico de rutas (Asegurando que encuentre la carpeta backend)
+# Este código aplica si ubican el archivo .db en la carpeta Backend, pero si lo dejan en la raíz del proyecto, no es necesario.
+
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#DB_NAME = os.path.join(BASE_DIR, "backend", "cafeteria_unisabana.db")
+
+# Base de datos global para todo el proyecto
+DB_NAME = "cafeteria_unisabana.db"
+
+# 2. Importamos la clase de la Interfaz Gráfica desde la carpeta frontend
+from Frontend.app_central import AppCentral
+
+def iniciar_app():
+    """
+    Punto de arranque de la aplicación.
+    Inicializa Tkinter, carga la clase principal y ejecuta el loop de eventos.
+    """
+    print("🚀 Iniciando Sistema Central ERP (GUI)...")
+    print(f"📂 Base de datos configurada: {DB_NAME}")
+    
+    # 1. Instanciamos el "lienzo" base de Tkinter
+    root = tk.Tk()
+    
+    # 2. Le pasamos el lienzo y la constante de la BD a nuestra clase orquestadora visual
+    app = AppCentral(root, DB_NAME)
+    
+    # 3. Iniciamos el "Loop" Principal de eventos. 
+    # El programa se queda "escuchando" interacciones del usuario.
+    root.mainloop()
+
+# Ejecución estándar en Python
+if __name__ == "__main__":
+    iniciar_app()
+
+

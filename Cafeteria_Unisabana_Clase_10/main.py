@@ -532,14 +532,14 @@ def Eliminar_Venta_Interactivo():
 
 if __name__ == "__main__":
     # 1. Creamos la base de datos a partir del archivo datos.py
-    Cargar_DB()
+    #Cargar_DB()
     
     # 2. Hacemos operaciones CRUD para simular la inserción de nuevos datos y su limpieza automática,
     # para luego ir a Power BI y actualizar el dashboard viendo cómo se reflejan estos cambios en tiempo real.
     #simulacion_power_bi()
 
     # 3. Prueba de ingreso interactivo por consola
-    #Cliente_Interactivo()
+    Cliente_Interactivo()
     #Producto_Interactivo()
     #Proveedor_Interactivo()
     #Ventas_Interactivo()
